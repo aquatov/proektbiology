@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Алкоголь, никотин и нервная система</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,700&family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#eef2f4; --surface:#ffffff; --ink:#16303a; --muted:#4f6670; --line:#c3d0d6;
+  --alc:#b0701c; --alc-bg:#f7ead6; --nic:#5b4b9a; --nic-bg:#e9e5f6; --signal:#d9482b;
+  color-scheme:light;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#13222a; --surface:#1b3039; --ink:#e6eef1; --muted:#9fb5bd; --line:#2f4854;
+    --alc:#e0a24f; --alc-bg:#3a2f1e; --nic:#b3a4ee; --nic-bg:#2c2748; --signal:#ff7a5c; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#13222a; --surface:#1b3039; --ink:#e6eef1; --muted:#9fb5bd; --line:#2f4854;
+  --alc:#e0a24f; --alc-bg:#3a2f1e; --nic:#b3a4ee; --nic-bg:#2c2748; --signal:#ff7a5c; color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.0625rem/1.65 Manrope,system-ui,sans-serif}
+h1,h2,h3{font-family:Literata,Georgia,serif;line-height:1.15;margin:0 0 .6em}
+h1{font-size:clamp(2.1rem,6.5vw,3.9rem);font-weight:700;letter-spacing:-.01em;max-width:16ch}
+h2{font-size:clamp(1.5rem,3.6vw,2.1rem);font-weight:700}
+h3{font-size:1.2rem;font-weight:700}
+p{margin:0 0 1em;max-width:64ch}
+a{color:inherit}
+.wrap{max-width:68rem;margin:0 auto;padding:0 1.25rem}
+header.hero{padding:3.5rem 0 2rem}
+.lead{font-size:1.2rem;color:var(--muted);max-width:52ch}
+.neuron{width:100%;height:auto;margin-top:1.5rem;display:block}
+.neuron .axon{stroke:var(--line);stroke-width:3;fill:none}
+.neuron .body{fill:var(--surface);stroke:var(--ink);stroke-width:2}
+.neuron .dend{stroke:var(--ink);stroke-width:2;fill:none}
+.neuron .pulse{fill:var(--signal)}
+.neuron text{fill:var(--muted);font:600 13px Manrope,sans-serif}
+.pulse{animation:go 4s ease-in-out 1 forwards}
+@keyframes go{0%{transform:translateX(0);opacity:0}10%{opacity:1}85%{opacity:1}100%{transform:translateX(560px);opacity:0}}
+section{padding:2.5rem 0;border-top:1px solid var(--line)}
+.tabs{display:flex;gap:.5rem;margin:1rem 0 1.25rem;flex-wrap:wrap}
+.tab{font:600 1rem Manrope,sans-serif;padding:.65rem 1.2rem;border:2px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;cursor:pointer}
+.tab:focus-visible{outline:3px solid var(--signal);outline-offset:2px}
+.tab[aria-selected="true"].alc{background:var(--alc-bg);border-color:var(--alc)}
+.tab[aria-selected="true"].nic{background:var(--nic-bg);border-color:var(--nic)}
+.panel{background:var(--surface);border-left:6px solid var(--line);padding:1.5rem 1.5rem .5rem;border-radius:4px}
+.panel.alc{border-color:var(--alc)} .panel.nic{border-color:var(--nic)}
+.panel[hidden]{display:none}
+.grid{display:grid;gap:1.5rem;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr))}
+.panel ul{padding-left:1.2rem;margin:0 0 1.2rem;max-width:64ch}
+.panel li{margin-bottom:.5rem}
+.table-wrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:34rem;background:var(--surface)}
+th,td{text-align:left;padding:.75rem 1rem;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:800}
+.note{background:var(--surface);border:1px dashed var(--muted);padding:1rem 1.25rem;border-radius:4px;max-width:64ch}
+footer{padding:2rem 0 3rem;border-top:1px solid var(--line);color:var(--muted);font-size:.95rem}
+@media (prefers-reduced-motion:reduce){.pulse{animation:none;opacity:1}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="hero">
+  <h1>Что алкоголь и никотин делают с нервной системой</h1>
+  <p class="lead">Нервная система работает как сеть из миллиардов клеток, которые передают друг другу сигналы. Оба вещества вмешиваются в эту передачу, и от этого меняются настроение, память, внимание и самоконтроль.</p>
+  <svg class="neuron" viewBox="0 0 700 150" role="img" aria-label="Схема нейрона: сигнал бежит от тела клетки по аксону к синапсу">
+    <path class="dend" d="M60 75 L20 40 M60 75 L15 75 M60 75 L20 110"/>
+    <circle class="body" cx="80" cy="75" r="26"/>
+    <path class="axon" d="M106 75 H610"/>
+    <circle class="pulse" cx="110" cy="75" r="7"/>
+    <circle class="body" cx="640" cy="75" r="22"/>
+    <text x="50" y="140">тело нейрона</text>
+    <text x="320" y="62">аксон: по нему идёт сигнал</text>
+    <text x="585" y="140">синапс</text>
+  </svg>
+</header>
+
+<section id="base">
+  <h2>Как передаётся сигнал</h2>
+  <p>Между двумя нейронами есть узкая щель, синапс. Когда сигнал доходит до её края, клетка выпускает молекулы-посредники, нейромедиаторы. Они садятся на рецепторы следующей клетки и либо запускают сигнал дальше, либо тормозят его.</p>
+  <p>Важные посредники для нашей темы: ГАМК (тормозит), глутамат (возбуждает), дофамин (связан с чувством награды) и ацетилхолин (участвует во внимании и памяти).</p>
+</section>
+
+<section id="effects">
+  <h2>Что происходит с каждым веществом</h2>
+  <div class="tabs" role="tablist" aria-label="Выберите вещество">
+    <button class="tab alc" role="tab" id="t-alc" aria-selected="true" aria-controls="p-alc">Алкоголь</button>
+    <button class="tab nic" role="tab" id="t-nic" aria-selected="false" aria-controls="p-nic">Никотин</button>
+  </div>
+
+  <div class="panel alc" role="tabpanel" id="p-alc" aria-labelledby="t-alc">
+    <h3>Алкоголь тормозит работу мозга</h3>
+    <p>Этанол усиливает действие ГАМК и ослабляет действие глутамата. В итоге сигналы идут медленнее.</p>
+    <ul>
+      <li><strong>Лобные доли:</strong> страдают самоконтроль и оценка рисков, поэтому человек в опьянении ведёт себя импульсивнее.</li>
+      <li><strong>Мозжечок:</strong> нарушается координация, походка становится шаткой, речь невнятной.</li>
+      <li><strong>Гиппокамп:</strong> ухудшается запоминание, отсюда «провалы» в памяти после большой дозы.</li>
+      <li><strong>При регулярном употреблении:</strong> возможны поражение периферических нервов (полинейропатия), нехватка витамина B1 и тяжёлые нарушения памяти, а также формирование зависимости.</li>
+    </ul>
+  </div>
+
+  <div class="panel nic" role="tabpanel" id="p-nic" aria-labelledby="t-nic" hidden>
+    <h3>Никотин подсаживает через систему награды</h3>
+    <p>Никотин похож на ацетилхолин и садится на его никотиновые рецепторы. Это запускает выброс дофамина, и мозг запоминает: сигарета равна награде.</p>
+    <ul>
+      <li><strong>Сразу после дозы:</strong> короткий подъём внимания и бодрости.</li>
+      <li><strong>Потом:</strong> уровень стимуляции падает, появляются раздражительность, тревога и трудности с концентрацией. Это тянет взять следующую дозу.</li>
+      <li><strong>Сосуды:</strong> курение сужает сосуды и повышает риск инсульта.</li>
+      <li><strong>Подростки:</strong> мозг развивается примерно до 25 лет, и никотин в этот период легче формирует стойкую зависимость.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="compare">
+  <h2>Сравнение</h2>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th></th><th>Алкоголь</th><th>Никотин</th></tr></thead>
+    <tbody>
+      <tr><th>Главная мишень</th><td>ГАМК- и глутаматные рецепторы</td><td>Никотиновые ацетилхолиновые рецепторы</td></tr>
+      <tr><th>Общий эффект</th><td>Торможение, замедление реакций</td><td>Краткая стимуляция, затем тревога</td></tr>
+      <tr><th>Связь с наградой</th><td>Повышает дофамин</td><td>Повышает дофамин</td></tr>
+      <tr><th>Риски для нервной системы</th><td>Память, координация, нервы</td><td>Сосуды мозга, зависимость, развитие мозга у подростков</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<section id="together">
+  <h2>Почему их часто употребляют вместе, и чем это плохо</h2>
+  <p>Оба вещества действуют на систему награды, поэтому зависимость от одного нередко усиливает тягу к другому. Исследования показывают, что среди людей, которые пьют, доля курящих выше, чем среди непьющих.</p>
+  <p>Двойная нагрузка на одни и те же системы мозга делает восстановление дольше.</p>
+</section>
+
+<section id="conclusion">
+  <h2>Выводы</h2>
+  <div class="grid">
+    <div><h3>Мозг восстанавливается</h3><p>После отказа многие функции, включая внимание и память, заметно улучшаются, хотя на это нужно время.</p></div>
+    <div><h3>Чем раньше, тем лучше</h3><p>Чем раньше человек бросает, тем меньше вреда успевает накопиться.</p></div>
+    <div><h3>Помощь существует</h3><p>Если бросить самому не получается, можно обратиться к врачу или психологу. Это обычная медицинская помощь.</p></div>
+  </div>
+</section>
+
+<footer>
+  <p class="note">Страница создана для учебного проекта и не заменяет консультацию врача. Перед сдачей проверь факты по первоисточникам: материалы ВОЗ, американских институтов NIAAA (алкоголь) и NIDA (наркотики и никотин).</p>
+</footer>
+</div>
+<script>
+(function(){
+  var tabs=document.querySelectorAll('.tab');
+  function show(id){
+    tabs.forEach(function(t){
+      var on=t.id===id;
+      t.setAttribute('aria-selected',on?'true':'false');
+      document.getElementById(t.getAttribute('aria-controls')).hidden=!on;
+    });
+  }
+  tabs.forEach(function(t){t.addEventListener('click',function(){show(t.id);});});
+})();
+</script>
+</body>
+</html>
